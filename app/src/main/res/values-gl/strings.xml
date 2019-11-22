@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Casa de Subastas</string>
+    <string name="menu_salir">Vai ao carallo</string>
+    <string name="menu_ajustes">Axustes</string>
+    <string name="nombre">Nome</string>
+    <string name="precio">Prezo</string>
+    <string name="vendedor">Vendedor</string>
+    <string name="menu_registro">Rexistro</string>
+    <string name="submenu_insertar">Novo Produto</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="descripcion">Descrición</string>
+    <string name="salir">Saír</string>
+    <string name="salir_mensaje">A aplicación vaise pechar</string>
+    <string name="insertar_item">ENGADIR PRODUTO</string>
+    <string name="foto_uri">Foto URI</string>
+    <string name="comprar_item">MERCAR PRODUTO</string>
+    <string name="comprar">Mercar</string>
+    <string name="cambiar_usuario">CAMBIAR USUARIO</string>
+    <string name="borrar_producto">BORRAR PRODUTO</string>
+    <string name="modificar_item">MODIFICAR PRODUTO</string>
+    <string name="password">Contrasinal</string>
+    <string name="submenu_nuevo_usuario">Novo Usuario</string>
+    <string name="no_usuario">Non hai un usuario conectado</string>
+    <string name="lista_vendedores">LISTA DE VENDEDORES</string>
+</resources>

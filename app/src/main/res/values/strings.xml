@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Casa de Subastas</string>
+    <string name="menu_salir">Salir</string>
+    <string name="menu_ajustes">Ajustes</string>
+    <string name="nombre">Nombre</string>
+    <string name="vendedor">Vendedor</string>
+    <string name="precio">Precio</string>
+    <string name="menu_registro">Registro</string>
+    <string name="submenu_insertar">Nuevo Producto</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="descripcion">Descripción</string>
+    <string name="salir">Salir</string>
+    <string name="salir_mensaje">La aplicación se va a cerrar</string>
+    <string name="insertar_item">AÑADIR PRODUCTO</string>
+    <string name="foto_uri">Foto URI</string>
+    <string name="comprar_item">COMPRAR PRODUCTO</string>
+    <string name="comprar">Comprar</string>
+    <string name="cambiar_usuario">CAMBIAR USUARIO</string>
+    <string name="borrar_producto">BORRAR PRODUCTO</string>
+    <string name="modificar_item">MODIFICAR PRODUCTO</string>
+    <string name="password">Contraseña</string>
+    <string name="submenu_nuevo_usuario">Nuevo Usuario</string>
+    <string name="no_usuario">No hay un usuario conectado</string>
+    <string name="lista_vendedores">LISTA DE VENDEDORES</string>
+</resources>

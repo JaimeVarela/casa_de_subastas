@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/m_registros"
+        android:title="@string/menu_registro">
+
+        <menu>
+
+            <item
+                android:id="@+id/m_insertar"
+                android:icon="@android:drawable/ic_menu_add"
+                android:title="@string/submenu_insertar"/>
+
+            <item
+                android:id="@+id/m_nuevo_usuario"
+                android:icon="@android:drawable/ic_menu_myplaces"
+                android:title="@string/submenu_nuevo_usuario"/>
+
+        </menu>
+
+    </item>
+
+    <item
+        android:id="@+id/m_vendedor"
+        android:title="@string/vendedor"/>
+
+    <item
+        android:id="@+id/m_ajustes"
+        android:title="@string/menu_ajustes"/>
+
+    <item
+        android:id="@+id/m_salir"
+        android:title="@string/menu_salir"/>
+
+</menu>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/darker_gray"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="6dp">
+
+    <ImageView
+        android:id="@+id/item_foto"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_weight="1"
+        android:padding="5dp"
+        android:contentDescription="@string/nombre"
+        app:srcCompat="@mipmap/ic_launcher_round" />
+
+    <TextView
+        android:id="@+id/item_nombre"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:padding="5dp"
+        android:gravity="center_vertical"
+        android:text="@string/nombre"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/item_vendedor"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:padding="5dp"
+        android:gravity="center"
+        android:text="@string/vendedor"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/item_precio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="5"
+        android:padding="5dp"
+        android:gravity="center_vertical|right"
+        android:text="@string/precio"
+        android:textColor="@android:color/white"/>
+
+    <ImageView
+        android:id="@+id/item_editar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_weight="1"
+        android:onClick="editar_item"
+        android:contentDescription="@string/nombre"
+        android:padding="5dp"
+        app:srcCompat="@android:drawable/ic_menu_edit" />
+
+    <ImageView
+        android:id="@+id/item_borrar"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_weight="1"
+        android:onClick="borrar_item"
+        android:contentDescription="@string/nombre"
+        android:padding="5dp"
+        app:srcCompat="@android:drawable/ic_menu_delete" />
+
+</LinearLayout>

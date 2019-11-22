@@ -37,7 +37,7 @@ public class VendorDatabase {
         return db.update(
                 VendedorEntrada.TABLA_NAME,
                 vendor,
-                "ID = " + i,
+                VendedorEntrada.ID + " = " + i,
                 null
         );
     }
@@ -46,7 +46,7 @@ public class VendorDatabase {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         return db.delete(
                 VendedorEntrada.TABLA_NAME,
-                "ID = " + i,
+                VendedorEntrada.ID + " = " + i,
                 null
         );
     }
@@ -65,7 +65,6 @@ public class VendorDatabase {
             );
             list.add(vendor);
         }
-        Toast.makeText(context, "Número de registros: " + c.getCount(), Toast.LENGTH_SHORT).show();
         c.close();
         db.close();
 

@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void insertar_item(){
         if(tvUsuario.getText().equals("")){
-            toast("No hay un usuario conectado");
+            toast(getText(R.string.no_usuario).toString());
             return;
         }
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -109,17 +109,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Double.parseDouble(et_precio.getText().toString()));
                     ItemDatabase itemDB = new ItemDatabase(getBaseContext());
                     if (itemDB.insertar(item) > 0)
-                        toast("Se ha insertado correctamente el producto");
+                        toast(getText(R.string.insertar_ok).toString());
                     actualizarLista();
                 }catch (Exception e){
-                    toast("Falta algún dato esencial");
+                    toast(getText(R.string.falta_dato).toString());
                 }
             }
         })
         .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-
+                dialog.dismiss();
             }
         });
         builder.show();
@@ -174,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             //Borramos el producto comprado de la lista
                             ItemDatabase itemDB = new ItemDatabase(getBaseContext());
                             if(itemDB.borrar(list.get(position).getId()) > 0){
-                                toast("Se ha comprado correctamente el producto");
+                                toast(getText(R.string.comprar_ok).toString());
                             }
 
                             actualizarLista();
@@ -185,7 +185,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 builder.setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        dialog.dismiss();
                     }
                 });
                 builder.show();
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 VendorDatabase db = new VendorDatabase(getBaseContext());
                 Vendor vendor = db.buscar_usuario(et_usuario.getText().toString(), et_password.getText().toString());
                 if(vendor != null){
-                    toast("El usuario ya existe");
+                    toast(getText(R.string.signin_repetido).toString());
                 }
                 else{
                     Vendor nuevoVendor = new Vendor(
@@ -223,9 +223,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             0
                     );
                     if(db.insertar(nuevoVendor) > 0){
-                        toast("Usuario registrado correctamente");
+                        toast(getText(R.string.signin_ok).toString());
                         tvUsuario.setText(nuevoVendor.getNombre());
-                        tvDinero.setText(String.format("%s$", String.valueOf(nuevoVendor.getDinero())));
+                        tvDinero.setText(String.valueOf(nuevoVendor.getDinero()));
                         actualizarLista(); //Para cambiar los productos que puede editar el nuevo usuario
                     }
                 }
@@ -234,7 +234,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        dialog.dismiss();
                     }
                 });
         builder.show();
@@ -271,7 +271,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        dialog.dismiss();
                     }
                 });
         builder.show();
@@ -281,7 +281,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.usuario:
-            case R.id.dinero:
                 cambiar_usuario();
                 break;
         }
@@ -302,18 +301,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Vendor vendor = db.buscar_usuario(et_usuario.getText().toString(), et_password.getText().toString());
                 if(vendor != null){
                     tvUsuario.setText(vendor.getNombre());
-                    tvDinero.setText(String.format("%s$", String.valueOf(vendor.getDinero())));
+                    tvDinero.setText(String.valueOf(vendor.getDinero()));
                     actualizarLista(); //Para cambiar los productos que puede editar el nuevo usuario
                 }
                 else{
-                    toast("Usuario o contraseña incorrectos");
+                    toast(getText(R.string.login_fallo).toString());
                 }
             }
         })
                 .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        dialog.dismiss();
                     }
                 });
         builder.show();
@@ -366,17 +365,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             Double.parseDouble(et_precio.getText().toString()));
                     ItemDatabase itemDB = new ItemDatabase(getBaseContext());
                     if (itemDB.modificar(item.toContentValues(), id) > 0)
-                        toast("Se ha insertado correctamente el producto");
+                        toast(getText(R.string.modificar_ok).toString());
                     actualizarLista();
                 }catch (Exception e){
-                    toast("Falta algún dato esencial");
+                    toast(getText(R.string.falta_dato).toString());
                 }
             }
         })
                 .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        dialog.dismiss();
                     }
                 });
         builder.show();
@@ -398,7 +397,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        dialog.dismiss();
                     }
                 });
         builder.show();
@@ -407,10 +406,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void aceptar_borrar(){
         LinearLayout vwParentRow = (LinearLayout)vItem.getParent();
         ListView lvParent = (ListView)vwParentRow.getParent();
+        int position = lvParent.indexOfChild(vwParentRow);
 
         ItemDatabase itemDB = new ItemDatabase(getBaseContext());
-        if(itemDB.borrar(list.get(lvParent.indexOfChild(vwParentRow)).getId()) > 0){
-            toast("Producto borrado correctamente");
+        if(itemDB.borrar(list.get(position).getId()) > 0){
+            toast(getText(R.string.producto_borrar_ok).toString());
+            list.remove(position);
         }
         actualizarLista();
     }

@@ -22,6 +22,15 @@
     <string name="modificar_item">MODIFICAR PRODUTO</string>
     <string name="password">Contrasinal</string>
     <string name="submenu_nuevo_usuario">Novo Usuario</string>
-    <string name="no_usuario">Non hai un usuario conectado</string>
+    <string name="no_usuario">Non usuario</string>
     <string name="lista_vendedores">LISTA DE VENDEDORES</string>
+    <string name="insertar_ok">Insertouse correctamente o produto</string>
+    <string name="falta_dato">Falta algún dato esencial</string>
+    <string name="producto_borrar_ok">Produto borrado correctamente</string>
+    <string name="login_fallo">Usuario ou constrasinal incorrectos</string>
+    <string name="signin_ok">Usuario rexistrado correctamente</string>
+    <string name="signin_repetido">O usuario xa existe</string>
+    <string name="comprar_ok">Comprouse correctamente o produto</string>
+    <string name="modificar_ok">Modificouse correctamente o produto</string>
+    <string name="dinero">Dinero</string>
 </resources>

@@ -37,7 +37,7 @@ public class ItemDatabase {
         return db.update(
                 TiendaEntrada.TABLA_NAME,
                 item,
-                "ID = " + i,
+                TiendaEntrada.ID + " = " + i,
                 null
         );
     }
@@ -46,7 +46,7 @@ public class ItemDatabase {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         return db.delete(
                 TiendaEntrada.TABLA_NAME,
-                "ID = " + i,
+                TiendaEntrada.ID + " = " + i,
                 null
         );
     }

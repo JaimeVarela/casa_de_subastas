@@ -8,6 +8,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -48,6 +49,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvDinero = (TextView)findViewById(R.id.dinero);
         tvDinero.setOnClickListener(this);
         lvItem = (ListView)findViewById(R.id.lvItem);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        recuperarLogin();
         actualizarLista();
     }
 
@@ -63,19 +70,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.m_insertar:
-                insertar_item();
+                insertarItem();
                 return true;
             case R.id.m_nuevo_usuario:
-                nuevo_usaurio();
+                nuevoUsaurio();
                 return true;
             case R.id.m_vendedor:
-                mostrar_vendedores();
+                mostrarVendedores();
                 return true;
             case R.id.m_ajustes:
                 toast("Pulsaste Ajustes");
                 return true;
             case R.id.m_salir:
-                cerrar_aplicacion();
+                cerrarAplicacion();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -83,7 +90,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //return super.onOptionsItemSelected(item);
     }
 
-    private void insertar_item(){
+    private void insertarItem(){
         if(tvUsuario.getText().equals("")){
             toast(getText(R.string.no_usuario).toString());
             return;
@@ -157,7 +164,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 final AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
                 //builder.setView(R.layout.comprar_item);
-                builder.setTitle(R.string.comprar_item);
+                builder.setTitle(R.string.info_item);
                 builder.setMessage(String.format("%s\n\n%s\n\n%s$",
                         list.get(position).getNombre(), list.get(position).getDescripcion(), list.get(position).getPrecio()));
                 builder.setCancelable(false);
@@ -169,7 +176,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         public void onClick(DialogInterface dialog, int which) {
                             //Le sumamos el dinero al usuario que lo vendió
                             VendorDatabase vendorDB = new VendorDatabase(getBaseContext());
-                            vendorDB.sumar_dinero(list.get(position).getVendedor(), list.get(position).getPrecio());
+                            vendorDB.sumarDinero(list.get(position).getVendedor(), list.get(position).getPrecio());
 
                             //Borramos el producto comprado de la lista
                             ItemDatabase itemDB = new ItemDatabase(getBaseContext());
@@ -193,7 +200,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
     }
 
-    private void nuevo_usaurio(){
+    private void nuevoUsaurio(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = this.getLayoutInflater();
         View content =  inflater.inflate(R.layout.cambiar_usuario, null);
@@ -211,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 EditText et_password = (EditText)f.findViewById(R.id.et_password);
 
                 VendorDatabase db = new VendorDatabase(getBaseContext());
-                Vendor vendor = db.buscar_usuario(et_usuario.getText().toString(), et_password.getText().toString());
+                Vendor vendor = db.buscarUsuario(et_usuario.getText().toString(), et_password.getText().toString());
                 if(vendor != null){
                     toast(getText(R.string.signin_repetido).toString());
                 }
@@ -224,6 +231,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     );
                     if(db.insertar(nuevoVendor) > 0){
                         toast(getText(R.string.signin_ok).toString());
+                        vendor = db.buscarUsuario(et_usuario.getText().toString(), et_password.getText().toString());
+                        guardarLogin(vendor.getId()); //Para guardar el login
                         tvUsuario.setText(nuevoVendor.getNombre());
                         tvDinero.setText(String.valueOf(nuevoVendor.getDinero()));
                         actualizarLista(); //Para cambiar los productos que puede editar el nuevo usuario
@@ -240,24 +249,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.show();
     }
 
-    private void mostrar_vendedores(){
-        VendorDatabase bd = new VendorDatabase(getBaseContext());
-        ArrayList<Vendor> vendors = bd.buscar();
-
-        String[] vendorsNombre = new String[vendors.size()];
-        String[] vendorsDinero = new String[vendors.size()];
-        for(int i = 0; i < vendors.size(); i++){
-            vendorsNombre[i] = vendors.get(i).getNombre();
-            vendorsDinero[i] = String.valueOf(vendors.get(i).getDinero());
-        }
-
+    private void mostrarVendedores(){
         Intent intent = new Intent(this, VendorActivity.class);
-        intent.putExtra("nombre", vendorsNombre);
-        intent.putExtra("dinero", vendorsDinero);
         startActivity(intent);
     }
 
-    private void cerrar_aplicacion(){
+    private void cerrarAplicacion(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.salir)
                 .setCancelable(false)
@@ -281,12 +278,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.usuario:
-                cambiar_usuario();
+                if(tvUsuario.getText().toString().equals(""))
+                    login();
+                else
+                    logout();
                 break;
         }
     }
 
-    private void cambiar_usuario(){
+    private void login(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(R.layout.cambiar_usuario);
         builder.setCancelable(false);
@@ -298,10 +298,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 EditText et_password = (EditText)f.findViewById(R.id.et_password);
 
                 VendorDatabase db = new VendorDatabase(getBaseContext());
-                Vendor vendor = db.buscar_usuario(et_usuario.getText().toString(), et_password.getText().toString());
+                Vendor vendor = db.buscarUsuario(et_usuario.getText().toString(), et_password.getText().toString());
                 if(vendor != null){
                     tvUsuario.setText(vendor.getNombre());
                     tvDinero.setText(String.valueOf(vendor.getDinero()));
+                    guardarLogin(vendor.getId()); //Para mantener sesión iniciada
                     actualizarLista(); //Para cambiar los productos que puede editar el nuevo usuario
                 }
                 else{
@@ -318,7 +319,28 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.show();
     }
 
-    public void editar_item(View v){
+    private void logout(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.cerrar_sesion)
+                .setCancelable(false)
+                .setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        tvUsuario.setText("");
+                        tvDinero.setText("");
+                        actualizarLista();
+                    }
+                })
+                .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        builder.show();
+    }
+
+    public void editarItem(View v){
         LinearLayout vwParentRow = (LinearLayout)v.getParent();
         ListView lvParent = (ListView)vwParentRow.getParent();
         Item mItem = list.get(lvParent.indexOfChild(vwParentRow));
@@ -381,7 +403,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.show();
     }
 
-    public void borrar_item(View v){
+    public void borrarItem(View v){
 
         vItem = v; //Para usar al aceptar el borrar el producto
 
@@ -391,7 +413,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        aceptar_borrar();
+                        aceptarBorrar();
                     }
                 })
                 .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
@@ -403,7 +425,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.show();
     }
 
-    private void aceptar_borrar(){
+    private void aceptarBorrar(){
         LinearLayout vwParentRow = (LinearLayout)vItem.getParent();
         ListView lvParent = (ListView)vwParentRow.getParent();
         int position = lvParent.indexOfChild(vwParentRow);
@@ -414,6 +436,26 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             list.remove(position);
         }
         actualizarLista();
+    }
+
+    private void guardarLogin(int id){
+        SharedPreferences pf = getSharedPreferences("login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor e = pf.edit();
+        e.putString("id", String.valueOf(id));
+        e.commit();
+    }
+
+    private void recuperarLogin(){
+        SharedPreferences pf = getSharedPreferences("login", Context.MODE_PRIVATE);
+        VendorDatabase db = new VendorDatabase(getBaseContext());
+        ArrayList<Vendor> vendorList = db.buscar();
+        for (Vendor v:
+             vendorList) {
+            if(String.valueOf(v.getId()).equals(pf.getString("id", ""))){
+                tvUsuario.setText(v.getNombre());
+                tvDinero.setText(String.valueOf(v.getDinero()));
+            }
+        }
     }
 
     private void toast(String texto){

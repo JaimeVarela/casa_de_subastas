@@ -51,6 +51,15 @@ public class ItemDatabase {
         );
     }
 
+    public long borrarVendedor(String nombre){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        return db.delete(
+                TiendaEntrada.TABLA_NAME,
+                TiendaEntrada.VENDEDOR + " = '" + nombre + "'",
+                null
+        );
+    }
+
     public ArrayList<Item> buscar(){
         ArrayList<Item> list = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();

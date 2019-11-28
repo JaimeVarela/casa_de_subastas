@@ -9,67 +9,55 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.casadesubastas.database.ItemDatabase;
 import com.example.casadesubastas.database.VendorDatabase;
+import com.example.casadesubastas.ui.VendorAdaptador;
+
+import java.util.ArrayList;
 
 public class VendorActivity extends AppCompatActivity {
 
-    private String[] nombre, dinero;
+    private ArrayList<Vendor> list;
     private ListView lvVendedores;
+    private View vItem;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vendor);
         asociar();
-        iniciar();
-        eventos();
+        actualizarLista();
     }
 
     private void asociar(){
         lvVendedores = (ListView)findViewById(R.id.lvVendedores);
     }
 
-    private void iniciar(){
-
-        if(getIntent().getStringArrayExtra("nombre") != null
-        && getIntent().getStringArrayExtra("dinero") != null){
-            nombre = getIntent().getStringArrayExtra("nombre");
-            dinero = getIntent().getStringArrayExtra("dinero");
-
-            String[] vendedores = new String[nombre.length];
-            for(int i = 0; i < vendedores.length; i++){
-                vendedores[i] = String.format("%s\t%s$", nombre[i], dinero[i]);
-            }
-
-            ArrayAdapter<String> adaptador =
-                    new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, vendedores);
-            lvVendedores.setAdapter(adaptador);
-        }
+    private void actualizarLista(){
+        VendorDatabase vendorDB = new VendorDatabase(getBaseContext());
+        list = vendorDB.buscar();
+        VendorAdaptador adaptador = new VendorAdaptador(this, list);
+        lvVendedores.setAdapter(adaptador);
     }
 
-    private void eventos(){
-        lvVendedores.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                dialogo(position);
-            }
-        });
-    }
+    public void borrarVendor(View v){
 
-    private void dialogo(int position){
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(String.format("%s: %s\n%s: %s",
-                getText(R.string.nombre).toString(), nombre[position], getText(R.string.dinero).toString(), dinero[position]));
-        builder.setCancelable(false);
-        builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
+        vItem = v; //Para usar al aceptar el borrar el vendedor
 
-            }
-        })
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.borrar_vendedor)
+                .setCancelable(false)
+                .setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        aceptarBorrar();
+                    }
+                })
                 .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -77,5 +65,29 @@ public class VendorActivity extends AppCompatActivity {
                     }
                 });
         builder.show();
+    }
+
+    private void aceptarBorrar(){
+        LinearLayout vwParentRow = (LinearLayout)vItem.getParent();
+        ListView lvParent = (ListView)vwParentRow.getParent();
+        int position = lvParent.indexOfChild(vwParentRow);
+
+        VendorDatabase vendorDB = new VendorDatabase(getBaseContext());
+        if(vendorDB.borrar(list.get(position).getId()) > 0){
+            toast(getText(R.string.vendedor_borrar_ok).toString());
+        }
+
+        //Ahora hay que borrar los productos que ha registrado este vendedor
+        String nombre = list.get(position).getNombre();
+        ItemDatabase itemDB = new ItemDatabase(getBaseContext());
+        if(itemDB.borrarVendedor(nombre) > 0){
+            toast(getText(R.string.producto_borrar_ok).toString());
+        }
+
+        actualizarLista();
+    }
+
+    private void toast(String texto){
+        Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
     }
 }

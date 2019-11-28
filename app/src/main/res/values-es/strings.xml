@@ -5,11 +5,11 @@
     <string name="menu_ajustes">Ajustes</string>
     <string name="nombre">Nombre</string>
     <string name="precio">Precio</string>
-    <string name="vendedor">Vendedor</string>
+    <string name="vendedor">Usuario</string>
     <string name="menu_registro">Registro</string>
     <string name="submenu_insertar">Nuevo Producto</string>
     <string name="aceptar">Aceptar</string>
-    <string name="cancelar">cancelar</string>
+    <string name="cancelar">Cancelar</string>
     <string name="descripcion">Descripción</string>
     <string name="salir">Salir</string>
     <string name="salir_mensaje">La aplicación se va a cerrar</string>
@@ -17,13 +17,13 @@
     <string name="foto_uri">Foto URI</string>
     <string name="comprar_item">COMPRAR PRODUCTO</string>
     <string name="comprar">Comprar</string>
-    <string name="cambiar_usuario">CAMBIAR USUARIO</string>
+    <string name="cambiar_usuario">INICIAR SESIÓN</string>
     <string name="borrar_producto">BORRAR PRODUCTO</string>
     <string name="modificar_item">MODIFICAR PRODUCTO</string>
     <string name="password">Contraseña</string>
     <string name="submenu_nuevo_usuario">Nuevo Usuario</string>
     <string name="no_usuario">No usuario</string>
-    <string name="lista_vendedores">LISTA DE VENDEDORES</string>
+    <string name="lista_vendedores">LISTA DE USUARIOS</string>
     <string name="insertar_ok">Se ha insertado correctamente el producto</string>
     <string name="falta_dato">Falta algún dato esencial</string>
     <string name="producto_borrar_ok">Producto borrado correctamente</string>
@@ -33,4 +33,8 @@
     <string name="comprar_ok">Se ha comprado correctamente el producto</string>
     <string name="modificar_ok">Se ha modificado correctamente el producto</string>
     <string name="dinero">Dinero</string>
+    <string name="info_item">INFORMACIÓN DEL PRODUCTO</string>
+    <string name="cerrar_sesion">CERRAR SESIÓN</string>
+    <string name="borrar_vendedor">BORRAR USUARIO</string>
+    <string name="vendedor_borrar_ok">Usuario borrado correctamente</string>
 </resources>

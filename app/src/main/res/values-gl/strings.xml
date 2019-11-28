@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Casa de Subastas</string>
-    <string name="menu_salir">Vai ao carallo</string>
+    <string name="menu_salir">Sair</string>
     <string name="menu_ajustes">Axustes</string>
     <string name="nombre">Nome</string>
     <string name="precio">Prezo</string>
-    <string name="vendedor">Vendedor</string>
+    <string name="vendedor">Usuario</string>
     <string name="menu_registro">Rexistro</string>
     <string name="submenu_insertar">Novo Produto</string>
     <string name="aceptar">Aceptar</string>
@@ -17,13 +17,13 @@
     <string name="foto_uri">Foto URI</string>
     <string name="comprar_item">MERCAR PRODUTO</string>
     <string name="comprar">Mercar</string>
-    <string name="cambiar_usuario">CAMBIAR USUARIO</string>
+    <string name="cambiar_usuario">INICIAR SESIÓN</string>
     <string name="borrar_producto">BORRAR PRODUTO</string>
     <string name="modificar_item">MODIFICAR PRODUTO</string>
     <string name="password">Contrasinal</string>
     <string name="submenu_nuevo_usuario">Novo Usuario</string>
     <string name="no_usuario">Non usuario</string>
-    <string name="lista_vendedores">LISTA DE VENDEDORES</string>
+    <string name="lista_vendedores">LISTA DE USUARIOS</string>
     <string name="insertar_ok">Insertouse correctamente o produto</string>
     <string name="falta_dato">Falta algún dato esencial</string>
     <string name="producto_borrar_ok">Produto borrado correctamente</string>
@@ -33,4 +33,8 @@
     <string name="comprar_ok">Comprouse correctamente o produto</string>
     <string name="modificar_ok">Modificouse correctamente o produto</string>
     <string name="dinero">Dinero</string>
+    <string name="info_item">INFORMACIÓN DO PRODUTO</string>
+    <string name="cerrar_sesion">PECHAR SESIÓN</string>
+    <string name="borrar_vendedor">BORRAR USUARIO</string>
+    <string name="vendedor_borrar_ok">Usuario borrado correctamente</string>
 </resources>

@@ -71,7 +71,7 @@ public class VendorDatabase {
         return list;
     }
 
-    public Vendor buscar_usuario(String nombre, String password){
+    public Vendor buscarUsuario(String nombre, String password){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + VendedorEntrada.TABLA_NAME, null);
         while (c.moveToNext()){
@@ -101,7 +101,7 @@ public class VendorDatabase {
         return null;
     }
 
-    public void sumar_dinero(String nombre, double dinero){
+    public void sumarDinero(String nombre, double dinero){
         //Buscar el usuario
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + VendedorEntrada.TABLA_NAME, null);

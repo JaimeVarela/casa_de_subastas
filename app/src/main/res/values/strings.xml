@@ -3,7 +3,7 @@
     <string name="menu_salir">Exit</string>
     <string name="menu_ajustes">Settings</string>
     <string name="nombre">Name</string>
-    <string name="vendedor">User</string>
+    <string name="vendedor">Seller</string>
     <string name="precio">Price</string>
     <string name="menu_registro">Register</string>
     <string name="submenu_insertar">New Product</string>
@@ -36,4 +36,5 @@
     <string name="vendedor_borrar_ok">User deleted successfully</string>
     <string name="info_item">PRODUCT INFORMATION</string>
     <string name="cerrar_sesion">LOG OUT</string>
+    <string name="usuarios">Users</string>
 </resources>

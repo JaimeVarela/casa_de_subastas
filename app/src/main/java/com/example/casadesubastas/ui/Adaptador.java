@@ -51,12 +51,12 @@ public class Adaptador extends BaseAdapter{
 
         convertView = LayoutInflater.from(context).inflate(R.layout.item_main, null);
 
-        ImageView imgFoto = (ImageView)convertView.findViewById(R.id.item_foto);
+        //ImageView imgFoto = (ImageView)convertView.findViewById(R.id.item_foto);
         TextView nombre = (TextView)convertView.findViewById(R.id.item_nombre);
         TextView vendedor = (TextView)convertView.findViewById(R.id.item_vendedor);
         TextView precio = (TextView)convertView.findViewById(R.id.item_precio);
 
-        imgFoto.setImageResource(R.mipmap.ic_launcher_round);
+        //imgFoto.setImageResource(R.mipmap.ic_launcher_round);
         nombre.setText(item.getNombre());
         vendedor.setText(item.getVendedor());
         precio.setText(String.valueOf(item.getPrecio()));

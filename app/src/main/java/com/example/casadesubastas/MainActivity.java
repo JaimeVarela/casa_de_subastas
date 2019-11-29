@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Context mContext;
     private ListView lvItem;
     private TextView tvUsuario, tvDinero;
+    private ImageButton btnNuevoItem;
 
     private ArrayList<Item> list;
     private View vItem;
@@ -48,6 +50,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvUsuario.setOnClickListener(this);
         tvDinero = (TextView)findViewById(R.id.dinero);
         tvDinero.setOnClickListener(this);
+        btnNuevoItem = (ImageButton)findViewById(R.id.btnNuevoItem);
+        btnNuevoItem.setOnClickListener(this);
         lvItem = (ListView)findViewById(R.id.lvItem);
     }
 
@@ -282,6 +286,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     login();
                 else
                     logout();
+                break;
+            case R.id.btnNuevoItem:
+                insertarItem();
                 break;
         }
     }

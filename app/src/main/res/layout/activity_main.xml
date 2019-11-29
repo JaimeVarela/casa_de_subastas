@@ -1,40 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/ic_launcher_background"
     android:orientation="vertical"
-    android:padding="5dp"
+    android:padding="8dp"
     tools:context=".MainActivity">
 
+    <!--Usuario-->
     <LinearLayout
+        android:id="@+id/llUsuario"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:orientation="horizontal">
 
         <ImageView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
             android:layout_weight="1"
             android:background="@drawable/back2"
-            android:padding="5dp"
-            app:srcCompat="@android:drawable/ic_menu_myplaces" />
+            app:srcCompat="@drawable/baseline_person_black_48" />
 
         <TextView
             android:id="@+id/usuario"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center"
-            android:layout_margin="5dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="0dp"
             android:layout_weight="3"
+            android:gravity="center_vertical"
             android:background="@drawable/back2"
             android:hint="@string/no_usuario"
-            android:padding="5dp"
-            android:textAlignment="textEnd"
+            android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/darker_gray"
             android:textSize="24sp" />
@@ -42,43 +43,39 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
             android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="0dp"
+            android:gravity="center_vertical"
             android:background="@drawable/back2"
-            android:padding="5dp"
             android:text="$"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textStyle="bold"
-            android:textSize="22sp"/>
+            android:textSize="32sp"/>
 
         <TextView
             android:id="@+id/dinero"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|center"
+            android:layout_height="match_parent"
             android:layout_weight="2"
+            android:gravity="center_vertical"
             android:background="@drawable/back2"
-            android:padding="5dp"
-            android:textAlignment="textEnd"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="0dp"
+            android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="24sp" />
     </LinearLayout>
 
+    <!--Leyenda-->
     <LinearLayout
-        android:id="@+id/elementos"
+        android:id="@+id/llLeyenda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/llUsuario"
         android:background="@drawable/back"
         android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@drawable/back"
-            android:padding="5dp" />
 
         <TextView
             android:layout_width="0dp"
@@ -88,8 +85,7 @@
             android:padding="5dp"
             android:text="@string/nombre"
             android:background="@drawable/back"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="0dp"
@@ -98,8 +94,7 @@
             android:gravity="center"
             android:text="@string/vendedor"
             android:background="@drawable/back"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="0dp"
@@ -108,19 +103,16 @@
             android:gravity="center"
             android:text="@string/precio"
             android:background="@drawable/back"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textColor="@android:color/white" />
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:padding="5dp" />
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:padding="5dp" />
 
     </LinearLayout>
@@ -129,5 +121,16 @@
         android:id="@+id/lvItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back" />
-</LinearLayout>
+        android:layout_below="@+id/llLeyenda"/>
+
+    <ImageButton
+        android:id="@+id/btnNuevoItem"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/floating_button"
+        android:src="@android:drawable/ic_input_add"/>
+
+</RelativeLayout>

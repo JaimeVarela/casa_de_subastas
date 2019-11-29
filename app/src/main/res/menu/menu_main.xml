@@ -3,6 +3,7 @@
 
     <item
         android:id="@+id/m_registros"
+        android:icon="@android:drawable/ic_menu_add"
         android:title="@string/menu_registro">
 
         <menu>
@@ -23,14 +24,17 @@
 
     <item
         android:id="@+id/m_vendedor"
-        android:title="@string/vendedor"/>
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="@string/usuarios"/>
 
     <item
         android:id="@+id/m_ajustes"
+        android:icon="@android:drawable/ic_menu_myplaces"
         android:title="@string/menu_ajustes"/>
 
     <item
         android:id="@+id/m_salir"
-        android:title="@string/menu_salir"/>
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="@string/menu_salir" />
 
 </menu>

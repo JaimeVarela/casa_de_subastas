@@ -5,7 +5,7 @@
     <string name="menu_ajustes">Axustes</string>
     <string name="nombre">Nome</string>
     <string name="precio">Prezo</string>
-    <string name="vendedor">Usuario</string>
+    <string name="vendedor">Vendedor</string>
     <string name="menu_registro">Rexistro</string>
     <string name="submenu_insertar">Novo Produto</string>
     <string name="aceptar">Aceptar</string>
@@ -37,4 +37,5 @@
     <string name="cerrar_sesion">PECHAR SESIÓN</string>
     <string name="borrar_vendedor">BORRAR USUARIO</string>
     <string name="vendedor_borrar_ok">Usuario borrado correctamente</string>
+    <string name="usuarios">Usuarios</string>
 </resources>

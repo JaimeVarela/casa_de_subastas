@@ -33,8 +33,7 @@
             android:padding="5dp"
             android:text="@string/nombre"
             android:background="@drawable/back"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="0dp"
@@ -44,8 +43,7 @@
             android:padding="5dp"
             android:text="@string/password"
             android:background="@drawable/back"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="0dp"
@@ -55,13 +53,11 @@
             android:padding="5dp"
             android:text="@string/dinero"
             android:background="@drawable/back"
-            android:textColor="@android:color/white"
-            android:textSize="18sp" />
+            android:textColor="@android:color/white" />
 
         <ImageView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:padding="5dp" />
 
     </LinearLayout>

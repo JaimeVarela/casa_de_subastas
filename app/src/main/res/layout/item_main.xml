@@ -5,17 +5,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="6dp">
-
-    <ImageView
-        android:id="@+id/item_foto"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:padding="5dp"
-        android:contentDescription="@string/nombre"
-        android:background="@drawable/back"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+    android:layout_margin="8dp"
+    android:background="@drawable/back">
 
     <TextView
         android:id="@+id/item_nombre"
@@ -52,22 +43,20 @@
 
     <ImageView
         android:id="@+id/item_editar"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
-        android:onClick="editar_item"
+        android:onClick="editarItem"
         android:contentDescription="@string/nombre"
         android:background="@drawable/back"
         app:srcCompat="@android:drawable/ic_menu_edit" />
 
     <ImageView
         android:id="@+id/item_borrar"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:layout_gravity="center"
-        android:onClick="borrar_item"
+        android:onClick="borrarItem"
         android:contentDescription="@string/nombre"
         android:background="@drawable/back"
         app:srcCompat="@android:drawable/ic_menu_delete" />

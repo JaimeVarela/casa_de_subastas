@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Context mContext;
     private ListView lvItem;
     private TextView tvUsuario, tvDinero;
-    private ImageButton btnNuevoItem;
+    private LinearLayout margenArriba, margenAbajo;
 
     private ArrayList<Item> list;
     private View vItem;
@@ -50,9 +50,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tvUsuario.setOnClickListener(this);
         tvDinero = (TextView)findViewById(R.id.dinero);
         tvDinero.setOnClickListener(this);
-        btnNuevoItem = (ImageButton)findViewById(R.id.btnNuevoItem);
-        btnNuevoItem.setOnClickListener(this);
         lvItem = (ListView)findViewById(R.id.lvItem);
+        margenArriba = (LinearLayout)findViewById(R.id.llLeyenda);
+        margenAbajo = (LinearLayout)findViewById(R.id.margenAbajo);
     }
 
     @Override
@@ -146,6 +146,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 puedoEditarItem.add(true);
             else
                 puedoEditarItem.add(false);
+        }
+        if(list.size() == 0) //No hay objetos
+        {
+            margenArriba.setVisibility(View.INVISIBLE);
+            margenAbajo.setVisibility(View.INVISIBLE);
+        }
+        else{
+            margenArriba.setVisibility(View.VISIBLE);
+            margenAbajo.setVisibility(View.VISIBLE);
         }
         /*
         for(int i=0; i< 50; i++){
@@ -286,9 +295,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     login();
                 else
                     logout();
-                break;
-            case R.id.btnNuevoItem:
-                insertarItem();
                 break;
         }
     }

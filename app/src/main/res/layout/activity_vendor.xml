@@ -5,34 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@drawable/ic_launcher_background"
+    android:padding="8dp"
     tools:context=".VendorActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        android:padding="8dp"
         android:text="@string/lista_vendedores"
-        android:textSize="30sp"
         android:textAlignment="center"
+        android:textSize="30sp"
         android:textStyle="bold"
-        android:textColor="@android:color/white"/>
+        android:textColor="@android:color/white"
+        android:background="@drawable/back2"/>
 
     <LinearLayout
-        android:id="@+id/elementos"
+        android:id="@+id/llLeyenda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/back"
+        android:background="@drawable/back3"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="4"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:padding="5dp"
             android:text="@string/nombre"
-            android:background="@drawable/back"
+            android:textStyle="bold"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -42,7 +44,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/password"
-            android:background="@drawable/back"
+            android:textStyle="bold"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -52,7 +54,7 @@
             android:gravity="center_vertical|end"
             android:padding="5dp"
             android:text="@string/dinero"
-            android:background="@drawable/back"
+            android:textStyle="bold"
             android:textColor="@android:color/white" />
 
         <ImageView
@@ -66,5 +68,12 @@
         android:id="@+id/lvVendedores"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/margenAbajo"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:background="@drawable/back4"
+        android:orientation="horizontal"/>
 
 </LinearLayout>

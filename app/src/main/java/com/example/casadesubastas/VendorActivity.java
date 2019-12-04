@@ -24,6 +24,7 @@ public class VendorActivity extends AppCompatActivity {
 
     private ArrayList<Vendor> list;
     private ListView lvVendedores;
+    private LinearLayout margenArriba, margenAbajo;
     private View vItem;
 
     @Override
@@ -36,6 +37,8 @@ public class VendorActivity extends AppCompatActivity {
 
     private void asociar(){
         lvVendedores = (ListView)findViewById(R.id.lvVendedores);
+        margenArriba = (LinearLayout)findViewById(R.id.llLeyenda);
+        margenAbajo = (LinearLayout)findViewById(R.id.margenAbajo);
     }
 
     private void actualizarLista(){
@@ -43,6 +46,15 @@ public class VendorActivity extends AppCompatActivity {
         list = vendorDB.buscar();
         VendorAdaptador adaptador = new VendorAdaptador(this, list);
         lvVendedores.setAdapter(adaptador);
+        if(list.size() == 0) //No hay objetos
+        {
+            margenArriba.setVisibility(View.INVISIBLE);
+            margenAbajo.setVisibility(View.INVISIBLE);
+        }
+        else{
+            margenArriba.setVisibility(View.VISIBLE);
+            margenAbajo.setVisibility(View.VISIBLE);
+        }
     }
 
     public void borrarVendor(View v){

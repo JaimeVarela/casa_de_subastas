@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_launcher_background"
     android:orientation="vertical"
     android:padding="8dp"
     tools:context=".MainActivity">
@@ -69,12 +68,13 @@
     </LinearLayout>
 
     <!--Leyenda-->
+
     <LinearLayout
         android:id="@+id/llLeyenda"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/llUsuario"
-        android:background="@drawable/back"
+        android:background="@drawable/back3"
         android:orientation="horizontal">
 
         <TextView
@@ -84,7 +84,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/nombre"
-            android:background="@drawable/back"
+            android:textStyle="bold"
             android:textColor="@android:color/white" />
 
         <TextView
@@ -93,16 +93,17 @@
             android:layout_weight="3"
             android:gravity="center"
             android:text="@string/vendedor"
-            android:background="@drawable/back"
+            android:textStyle="bold"
             android:textColor="@android:color/white" />
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
-            android:gravity="center"
+            android:padding="5dp"
+            android:gravity="center_vertical|end"
             android:text="@string/precio"
-            android:background="@drawable/back"
+            android:textStyle="bold"
             android:textColor="@android:color/white" />
 
         <ImageView
@@ -123,14 +124,12 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/llLeyenda"/>
 
-    <ImageButton
-        android:id="@+id/btnNuevoItem"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:background="@drawable/floating_button"
-        android:src="@android:drawable/ic_input_add"/>
+    <LinearLayout
+        android:id="@+id/margenAbajo"
+        android:layout_width="match_parent"
+        android:layout_height="16dp"
+        android:layout_below="@+id/lvItem"
+        android:background="@drawable/back4"
+        android:orientation="horizontal"/>
 
 </RelativeLayout>

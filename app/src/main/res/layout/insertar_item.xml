@@ -7,9 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@android:color/darker_gray"
-        android:background="@android:drawable/stat_sys_upload">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/tvInsertar_item"
@@ -26,7 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/tvInsertar_item"
-            android:hint="@string/foto_uri" />
+            android:hint="@string/foto_uri"
+            android:visibility="gone"/>
 
         <EditText
             android:id="@+id/et_nombre"

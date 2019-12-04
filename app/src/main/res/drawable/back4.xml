@@ -2,5 +2,7 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
     <solid android:color="#005085"/>
+    <corners android:bottomLeftRadius="@android:dimen/app_icon_size"
+        android:bottomRightRadius="@android:dimen/app_icon_size"/>
 
 </shape>

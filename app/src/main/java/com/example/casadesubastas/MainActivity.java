@@ -17,8 +17,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -35,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Context mContext;
     private ListView lvItem;
     private TextView tvUsuario, tvDinero;
-    private LinearLayout margenArriba, margenAbajo;
+    private LinearLayout margenArriba, margenAbajo, llUsuario;
 
     private ArrayList<Item> list;
     private View vItem;
@@ -47,10 +45,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         mContext = this;
         tvUsuario = (TextView)findViewById(R.id.usuario);
-        tvUsuario.setOnClickListener(this);
         tvDinero = (TextView)findViewById(R.id.dinero);
         tvDinero.setOnClickListener(this);
         lvItem = (ListView)findViewById(R.id.lvItem);
+        llUsuario = (LinearLayout)findViewById(R.id.llUsuario);
+        llUsuario.setOnClickListener(this);
         margenArriba = (LinearLayout)findViewById(R.id.llLeyenda);
         margenAbajo = (LinearLayout)findViewById(R.id.margenAbajo);
     }
@@ -60,6 +59,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onStart();
         recuperarLogin();
         actualizarLista();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.llUsuario:
+                if(tvUsuario.getText().toString().equals(""))
+                    login();
+                else
+                    logout();
+                break;
+        }
     }
 
     @Override
@@ -83,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mostrarVendedores();
                 return true;
             case R.id.m_ajustes:
-                toast("Pulsaste Ajustes");
+                toast(getText(R.string.ajustes).toString());
                 return true;
             case R.id.m_salir:
                 cerrarAplicacion();
@@ -91,49 +102,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             default:
                 return super.onOptionsItemSelected(item);
         }
-        //return super.onOptionsItemSelected(item);
-    }
-
-    private void insertarItem(){
-        if(tvUsuario.getText().equals("")){
-            toast(getText(R.string.no_usuario).toString());
-            return;
-        }
-        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setView(R.layout.insertar_item);
-        builder.setCancelable(false);
-        builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                try {
-                    Dialog f = (Dialog) dialog;
-                    EditText et_foto_uri = (EditText) f.findViewById(R.id.et_foto_uri);
-                    EditText et_nombre = (EditText) f.findViewById(R.id.et_nombre);
-                    EditText et_descripcion = (EditText) f.findViewById(R.id.et_descripcion);
-                    EditText et_precio = (EditText) f.findViewById(R.id.et_precio);
-
-                    Item item = new Item(
-                            et_foto_uri.getText().toString(),
-                            et_nombre.getText().toString(),
-                            et_descripcion.getText().toString(),
-                            tvUsuario.getText().toString(),
-                            Double.parseDouble(et_precio.getText().toString()));
-                    ItemDatabase itemDB = new ItemDatabase(getBaseContext());
-                    if (itemDB.insertar(item) > 0)
-                        toast(getText(R.string.insertar_ok).toString());
-                    actualizarLista();
-                }catch (Exception e){
-                    toast(getText(R.string.falta_dato).toString());
-                }
-            }
-        })
-        .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.show();
     }
 
     private void actualizarLista(){
@@ -141,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         list = itemDB.buscar();
         ArrayList<Boolean> puedoEditarItem = new ArrayList<>();
         for (Item i:
-             list) {
+                list) {
             if(i.getVendedor().equals(tvUsuario.getText().toString()))
                 puedoEditarItem.add(true);
             else
@@ -156,17 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             margenArriba.setVisibility(View.VISIBLE);
             margenAbajo.setVisibility(View.VISIBLE);
         }
-        /*
-        for(int i=0; i< 50; i++){
-            list.add(new Item(
-                "",
-                "Hago Scroll",
-               "Hola",
-                    "Yo solo",
-                    123
-            ));
-        }
-         */
+
         Adaptador adaptador = new Adaptador(this, list, puedoEditarItem);
         lvItem.setAdapter(adaptador);
 
@@ -211,6 +169,48 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 builder.show();
             }
         });
+    }
+
+    private void insertarItem(){
+        if(tvUsuario.getText().equals("")){
+            toast(getText(R.string.no_usuario).toString());
+            return;
+        }
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(R.layout.insertar_item);
+        builder.setCancelable(false);
+        builder.setPositiveButton(R.string.aceptar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                try {
+                    Dialog f = (Dialog) dialog;
+                    EditText et_foto_uri = (EditText) f.findViewById(R.id.et_foto_uri);
+                    EditText et_nombre = (EditText) f.findViewById(R.id.et_nombre);
+                    EditText et_descripcion = (EditText) f.findViewById(R.id.et_descripcion);
+                    EditText et_precio = (EditText) f.findViewById(R.id.et_precio);
+
+                    Item item = new Item(
+                            et_foto_uri.getText().toString(),
+                            et_nombre.getText().toString(),
+                            et_descripcion.getText().toString(),
+                            tvUsuario.getText().toString(),
+                            Double.parseDouble(et_precio.getText().toString()));
+                    ItemDatabase itemDB = new ItemDatabase(getBaseContext());
+                    if (itemDB.insertar(item) > 0)
+                        toast(getText(R.string.insertar_ok).toString());
+                    actualizarLista();
+                }catch (Exception e){
+                    toast(getText(R.string.falta_dato).toString());
+                }
+            }
+        })
+        .setNegativeButton(R.string.cancelar, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 
     private void nuevoUsaurio(){
@@ -287,18 +287,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         builder.show();
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.usuario:
-                if(tvUsuario.getText().toString().equals(""))
-                    login();
-                else
-                    logout();
-                break;
-        }
-    }
-
     private void login(){
         final AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setView(R.layout.cambiar_usuario);
@@ -341,6 +329,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onClick(DialogInterface dialog, int which) {
                         tvUsuario.setText("");
                         tvDinero.setText("");
+                        borrarLogin();
                         actualizarLista();
                     }
                 })
@@ -455,7 +444,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         SharedPreferences pf = getSharedPreferences("login", Context.MODE_PRIVATE);
         SharedPreferences.Editor e = pf.edit();
         e.putString("id", String.valueOf(id));
-        e.commit();
+        e.apply();
+    }
+
+    private void borrarLogin(){
+        SharedPreferences pf = getSharedPreferences("login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor e = pf.edit();
+        e.clear();
+        e.apply();
     }
 
     private void recuperarLogin(){

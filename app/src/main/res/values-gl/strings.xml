@@ -22,7 +22,7 @@
     <string name="modificar_item">MODIFICAR PRODUTO</string>
     <string name="password">Contrasinal</string>
     <string name="submenu_nuevo_usuario">Novo Usuario</string>
-    <string name="no_usuario">Non usuario</string>
+    <string name="login">Entrar...</string>
     <string name="lista_vendedores">LISTA DE USUARIOS</string>
     <string name="insertar_ok">Insertouse correctamente o produto</string>
     <string name="falta_dato">Falta algún dato esencial</string>
@@ -38,4 +38,6 @@
     <string name="borrar_vendedor">BORRAR USUARIO</string>
     <string name="vendedor_borrar_ok">Usuario borrado correctamente</string>
     <string name="usuarios">Usuarios</string>
+    <string name="no_usuario">Non hai usuario</string>
+    <string name="ajustes">Pulsaste axustes</string>
 </resources>

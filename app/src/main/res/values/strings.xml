@@ -21,7 +21,7 @@
     <string name="modificar_item">EDIT PRODUCT</string>
     <string name="password">Password</string>
     <string name="submenu_nuevo_usuario">New User</string>
-    <string name="no_usuario">No user</string>
+    <string name="login">Login...</string>
     <string name="lista_vendedores">USERS LIST</string>
     <string name="insertar_ok">The product was registered successfully</string>
     <string name="falta_dato">Some essential data is missing</string>
@@ -37,4 +37,6 @@
     <string name="info_item">PRODUCT INFORMATION</string>
     <string name="cerrar_sesion">LOG OUT</string>
     <string name="usuarios">Users</string>
+    <string name="no_usuario">No user</string>
+    <string name="ajustes">You pressed Settings</string>
 </resources>

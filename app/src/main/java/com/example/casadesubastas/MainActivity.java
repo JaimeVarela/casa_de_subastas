@@ -107,6 +107,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private void actualizarLista(){
         ItemDatabase itemDB = new ItemDatabase(getBaseContext());
         list = itemDB.buscar();
+
+
         ArrayList<Boolean> puedoEditarItem = new ArrayList<>();
         for (Item i:
                 list) {
@@ -115,14 +117,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             else
                 puedoEditarItem.add(false);
         }
+
         if(list.size() == 0) //No hay objetos
         {
             margenArriba.setVisibility(View.INVISIBLE);
             margenAbajo.setVisibility(View.INVISIBLE);
+            lvItem.setVisibility(View.INVISIBLE);
         }
         else{
             margenArriba.setVisibility(View.VISIBLE);
             margenAbajo.setVisibility(View.VISIBLE);
+            lvItem.setVisibility(View.VISIBLE);
         }
 
         Adaptador adaptador = new Adaptador(this, list, puedoEditarItem);

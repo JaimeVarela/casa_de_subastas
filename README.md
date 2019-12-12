@@ -4,7 +4,7 @@ Esto es un proyecto realizado para el Curso de Creación de Aplicaciones Móvile
 La aplicación consta de dos actividades:
 1. Actividad de productos, donde registrar nuevos productos y ususarios, que pueden editar y borrar productos si los han registrado ellos, 
 y comprarlos si son de otro usuario.
-2. Lista de usuarios, donde consultar el saldo y con la posibilidad de borrar.
+2. Actividad de usuarios, donde consultar el saldo y con la posibilidad de borrar.
 
 La aplicación consta de dos bases de datos:
 1. Lista de productos.
